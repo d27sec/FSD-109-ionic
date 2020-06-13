@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Message } from '../models/message';
+import { ShareService } from '../services/share.service';
+import { Friend } from '../models/friend';
 
 @Component({
   selector: 'app-tab1',
@@ -9,12 +11,26 @@ import { Message } from '../models/message';
 })
 export class Tab1Page implements OnInit {
 
+  model: Message= new Message();
+
   messagesToDisplay: Message[];
 
-  constructor(private data: DataService) {
+
+  constructor(private data: DataService, private shared: ShareService){
     this.data.getAllMessages().subscribe( list =>{
-      this.messagesToDisplay=list;
+      this.messagesToDisplay=[];
+      list.forEach(message => {
+        if(message.from == shared.userName || message.to == shared.userName || message.to == 'Everyone'){
+          this.messagesToDisplay.push(message);
+        }
+        
+      });
     });
+
+
+
+
+
   }
 
 

@@ -1,7 +1,11 @@
 <ion-header >
   <ion-toolbar color='primary'>
     <ion-title>
-      Coming soon...
+      Coming soon... 
+      <ion-select [(ngModel)]='model.to' name='to' interface="alert">
+        <ion-select-option [value]=''>Everyone</ion-select-option>
+        <ion-select-option *ngFor='let friend of friendsToDisplay'>{{friend.name}}</ion-select-option>
+      </ion-select>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,7 +20,8 @@
     
     <ion-card-content>
       <img src="{{message.imageUrl}}">
-      <ion-card-subtitle>{{message.from}}</ion-card-subtitle>
+      <ion-card-subtitle>from:{{message.from}}</ion-card-subtitle>
+      <ion-card-subtitle>to:{{message.to}}</ion-card-subtitle>
     </ion-card-content>
   </ion-card>
 

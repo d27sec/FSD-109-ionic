@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Message } from '../models/message';
 import { ShareService } from '../services/share.service';
 import { DataService } from '../services/data.service';
+import { Friend } from '../models/friend';
 
 @Component({
   selector: 'app-tab2',
@@ -10,8 +11,29 @@ import { DataService } from '../services/data.service';
 })
 export class Tab2Page {
   model: Message= new Message();
+  myFriends: Friend[]=[];
   
-  constructor(private shared: ShareService, private data: DataService) {}
+
+  constructor(private shared: ShareService, private data: DataService) {
+    this.data.getAllFriends().subscribe(list => {
+      this.myFriends = [];
+
+      //---------------------array filter hw--------------------------
+      //travel list of friends
+      list.forEach(friend => {
+        if(this.shared.userName== friend.friendOf){
+          this.myFriends.push(friend);
+        }
+      });
+
+      //hw this.friendsToDisplay = list.filter(...)
+      //---------------------array filter hw--------------------------
+
+
+      //compare if friend.friendOf is equal to my username
+      //if so push to friendsToDisplayArray
+    })
+  }
   
   post(){
     this.model.from = this.shared.userName;
