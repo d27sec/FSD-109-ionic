@@ -9,7 +9,17 @@
 <ion-content [fullscreen]="true">
   <!-- page content -->
 
-  <ion-button color='secondary'>Ionic baby</ion-button>
+  <ion-card *ngFor='let message of messagesToDisplay'>
+    <ion-card-header>
+      <ion-card-title> {{message.text}}</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <img src="{{message.imageUrl}}">
+      <ion-card-subtitle>{{message.from}}</ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+
 
   
 </ion-content>

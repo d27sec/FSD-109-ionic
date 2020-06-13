@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Message } from '../models/message';
+import { ShareService } from '../services/share.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-tab2',
@@ -6,13 +9,17 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  message: String
-  urlTxt: String
+  model: Message= new Message();
+  
+  constructor(private shared: ShareService, private data: DataService) {}
+  
   post(){
-    console.log(this.message, this.urlTxt)
+    this.model.from = this.shared.userName;
+    console.log(this.model)
+    //save fn on dataService
+    this.data.saveMessage(this.model);
+    console.log('saved', this.model);
 
+    this.model = new Message();
   }
-
-  constructor() {}
-
 }
