@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Friend } from '../models/friend';
 import { ShareService } from '../services/share.service';
 import { DataService } from '../services/data.service';
+import { Z_FILTERED } from 'zlib';
 
 @Component({
   selector: 'app-tab3',
@@ -21,15 +22,18 @@ export class Tab3Page {
 
       //---------------------array filter hw--------------------------
       //travel list of friends
-      list.forEach(friend => {
-        if(this.shared.userName== friend.friendOf){
-          this.friendsToDisplay.push(friend);
-        }
-      });
+
+      // list.forEach(friend => {
+      //   if(this.shared.userName== friend.friendOf){
+      //     this.friendsToDisplay.push(friend);
+      //   }
+      // });
+
+      this.friendsToDisplay = list.filter(friend => this.shared.userName==friend.friendOf)
 
       //hw this.friendsToDisplay = list.filter(...)
       //---------------------array filter hw--------------------------
-
+      console.log()
     });
   }
 
