@@ -10,22 +10,16 @@ import { Friend } from '../models/friend';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  model: Message= new Message();
-  myFriends: Friend[]=[];
-  
+  model: Message = new Message();
+  friendsToDisplay: Friend[] = [];
+
 
   constructor(private shared: ShareService, private data: DataService) {
     this.data.getAllFriends().subscribe(list => {
-      this.myFriends = [];
 
       //---------------------array filter hw--------------------------
       //travel list of friends
-      list.forEach(friend => {
-        if(this.shared.userName== friend.friendOf){
-          this.myFriends.push(friend);
-        }
-      });
-
+      this.friendsToDisplay = list.filter(friend => this.shared.userName == friend.friendOf)
       //hw this.friendsToDisplay = list.filter(...)
       //---------------------array filter hw--------------------------
 
@@ -34,8 +28,8 @@ export class Tab2Page {
       //if so push to friendsToDisplayArray
     })
   }
-  
-  post(){
+
+  post() {
     this.model.from = this.shared.userName;
     console.log(this.model)
     //save fn on dataService

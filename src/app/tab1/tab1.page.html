@@ -2,10 +2,6 @@
   <ion-toolbar color='primary'>
     <ion-title>
       Coming soon... 
-      <ion-select [(ngModel)]='model.to' name='to' interface="alert">
-        <ion-select-option [value]=''>Everyone</ion-select-option>
-        <ion-select-option *ngFor='let friend of friendsToDisplay'>{{friend.name}}</ion-select-option>
-      </ion-select>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -22,6 +18,7 @@
       <img src="{{message.imageUrl}}">
       <ion-card-subtitle>from:{{message.from}}</ion-card-subtitle>
       <ion-card-subtitle>to:{{message.to}}</ion-card-subtitle>
+      <ion-card-subtitle>to:{{message.createdOn | date: 'MM-dd-yyyy hh:mm:ss'}}</ion-card-subtitle>
     </ion-card-content>
   </ion-card>
 

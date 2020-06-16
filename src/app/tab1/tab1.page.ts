@@ -19,12 +19,22 @@ export class Tab1Page implements OnInit {
   constructor(private data: DataService, private shared: ShareService){
     this.data.getAllMessages().subscribe( list =>{
       this.messagesToDisplay=[];
-      list.forEach(message => {
-        if(message.from == shared.userName || message.to == shared.userName || message.to == 'Everyone'){
-          this.messagesToDisplay.push(message);
-        }
+      this.messagesToDisplay = list.filter(message => 
+        message.from == shared.userName || message.to == shared.userName || message.to == 'Everyone')
         
-      });
+
+        //sort by date
+
+        this.messagesToDisplay = this.messagesToDisplay.sort(function(a,b){
+          if(a.createdOn < b.createdOn){
+            return -1
+          }
+          else if(a.createdOn > b.createdOn){
+            return 1
+          }
+          return 0
+        }
+      );
     });
 
 

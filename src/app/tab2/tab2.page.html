@@ -26,7 +26,7 @@
         <ion-label position='floating'>To</ion-label>
         <ion-select [(ngModel)]='model.to' name='to' interface="alert">
           <ion-select-option value='Everyone'>Everyone</ion-select-option>
-          <ion-select-option *ngFor='let friend of myFriends' [value]='friend.name'>{{friend.name}}</ion-select-option>
+          <ion-select-option *ngFor='let friend of friendsToDisplay' [value]='friend.name'>{{friend.name}}</ion-select-option>
         </ion-select>
       </ion-item>
 
